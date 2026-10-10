@@ -2,6 +2,7 @@ import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
 
 import React from 'react';
+import Link from "next/link";
 
 const Marquee = async() => {
     const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products",  {
@@ -19,8 +20,9 @@ const Marquee = async() => {
     <div className="sticky top-0 z-50">
         <MarqueeText direction="right" duration={30} className="shadow">
             <div className="flex flex-nowrap gap-7 text-sm bg-[#F3FBF4] p-1">
-                {data.map(d => (
-                    <div className="flex items-center gap-1 shrink-0" key={d.id}>
+                {data.map((d,ind) => (
+                    <Link href={`/detail/${d.id}`}
+                    className="flex items-center gap-1 shrink-0" key={d.id}>
                         {d.image} {d.nameBn} {d.today} টাকা/কেজি {" "}
 
                         <span
@@ -39,7 +41,7 @@ const Marquee = async() => {
                                 : "—"}{" "}
                             {d.change.pct}
                         </span>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </MarqueeText>
