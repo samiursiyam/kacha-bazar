@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./component/Navbar";
 import Nevlinks from "./component/Nevlinks";
 import Marquee from "./component/Marquee";
+import Footer from "./component/Footer";
 
 const notoSerifBengali = Noto_Serif_Bengali({
   variable: "--font-bengali",
@@ -41,6 +42,8 @@ export default function RootLayout({ children }) {
 
 
         <div className="flex-1 bg-[#f4f5f5]">{children}</div>
+        
+<Footer />
       </body>
     </html>
   );

@@ -6,14 +6,14 @@ const CategoriesPage = async({params}) => {
     const {categoriesId} =await params
     
 
-    const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products?category=${categoriesId} `)
+    const res = await fetch(`https://api.abcz.workers.dev/api/bazardor/products?category=${categoriesId} `)
     const data = await res.json()
 
     const category = data[0]
 // console.log(data);
     
    return (
-    <div className="min-h-screen  p-4 md:p-8 font-sans">
+    <div className=" p-4 md:p-8 font-sans">
       <div className="max-w-7xl mx-auto">
 
         {/* 🔹 Header — data[0] থেকে নাম ও আইকন */}

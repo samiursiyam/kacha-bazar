@@ -3,13 +3,13 @@ import React from 'react';
 
 const Header = () => {
     // Real Bengali date
-    const today = new Date();
-    const bengaliDate = today.toLocaleDateString('bn-BD', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-    });
+    // const today = new Date();
+    // const bengaliDate = today.toLocaleDateString('bn-BD', {
+    //     weekday: 'long',
+    //     day: 'numeric',
+    //     month: 'long',
+    //     year: 'numeric',
+    // });
 
     return (
         <div className='bg-[#bedfbe1f] py-3 md:py-5'>
@@ -22,7 +22,7 @@ const Header = () => {
                             {/* Date badge */}
                             <div className='inline-block px-3 py-1 rounded-full border border-[#c9d4cd] bg-[#05893E]/10'>
                                 <span className='text-[#05893E] font-medium text-xs md:text-sm'>
-                                    {bengaliDate}
+                                    {/* {bengaliDate} */}
                                 </span>
                             </div>
 

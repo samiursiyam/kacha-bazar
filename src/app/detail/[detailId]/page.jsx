@@ -10,7 +10,7 @@ const page = async ({ params }) => {
     const { detailId } = await params;
 
     const res = await fetch(
-        `https://api.api-store.workers.dev/api/bazardor/products/${detailId}`
+        `https://api.abcz.workers.dev/api/bazardor/products/${detailId}`
     );
     const data = await res.json();
 
