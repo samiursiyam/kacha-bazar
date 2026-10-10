@@ -3,7 +3,10 @@ import React from 'react';
 
 const Upprice = async () => {
     const res = await fetch(
-        "https://api.abcz.workers.dev/api/bazardor/products"
+        "https://api.abcz.workers.dev/api/bazardor/products",
+        {
+    next: { revalidate: 3600 },
+  }
     );
 
     const data = await res.json();
