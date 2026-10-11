@@ -1,5 +1,7 @@
+"use client"
 import Link from "next/link";
 import React from "react";
+import Userinfo from "./Userinfo";
 
 const Navbar = () => {
   const banglaDate = new Intl.DateTimeFormat("bn-BD", {
@@ -31,14 +33,7 @@ const Navbar = () => {
 
 </Link>
 
-        <div className="flex">
-          <button className="btn btn-ghost btn-sm pr-5 text-gray-700 font-bold text-sm">
-            সাইন ইন
-          </button>
-          <button className="btn btn-primary btn-sm bg-green-700 border-none font-bold text-sm">
-            সাইন আপ
-          </button>
-        </div>
+ <div>      <Userinfo /></div>
       </div>
     </nav>
   );
