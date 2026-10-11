@@ -14,7 +14,7 @@ const SignIn = () => {
         const formData = new FormData(e.currentTarget);
         const user = Object.fromEntries(formData.entries());
 
-        console.log(user);
+        
 
         try {
             const { data, error } = await authClient.signIn.email({
@@ -27,11 +27,6 @@ const SignIn = () => {
                 toast.error(
                     "এই ইমেইলে আগে Google দিয়ে অ্যাকাউন্ট তৈরি করে থাকলে Google দিয়ে সাইন ইন করুন।"
                 );
-
-                setTimeout(() => {
-                    window.location.href = "/signup";
-                }, 2000);
-
                 return;
             }
 
@@ -41,9 +36,7 @@ const SignIn = () => {
         } catch (error) {
             toast.error("সাইন ইন করা যায়নি। আবার চেষ্টা করুন।");
 
-            setTimeout(() => {
-                window.location.href = "/signup";
-            }, 2000);
+           
         }
     };
 
@@ -58,6 +51,13 @@ const SignIn = () => {
             toast.error("Google দিয়ে সাইন ইন করা যায়নি। আবার চেষ্টা করুন।");
         }
     };
+
+
+    const hentdelGithub = async()=>{
+ const data = await authClient.signIn.social({
+        provider: "github"
+    })
+    }
 
     return (
         <div className="bg-gray-100 flex flex-col justify-center items-center py-10 px-4 font-sans">
@@ -172,6 +172,7 @@ const SignIn = () => {
           </button> 
 
                     <button
+                    onClick={hentdelGithub}
             type="button"
             className="flex-1 flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
           >

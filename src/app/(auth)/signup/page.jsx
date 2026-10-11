@@ -34,14 +34,32 @@ const SignUp = () => {
 
     if (data) {
       toast.success("আপনার অ্যাকাউন্ট সফল ভাবে তৈরী করা হয়েছ।");
-      redirect('/')
+      redirect("/");
     }
 
     if (error) {
-      console.log(error);
+     
       toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
     }
   };
+
+  const hendelGoogleSignin = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+        errorCallbackURL: "/signup",
+      });
+    } catch (error) {
+      toast.error("Google দিয়ে সাইন ইন করা যায়নি। আবার চেষ্টা করুন।");
+    }
+  };
+
+    const hentdelGithub = async()=>{
+   const data = await authClient.signIn.social({
+          provider: "github"
+      })
+      }
 
   return (
     <div className="bg-gray-100 flex flex-col justify-center items-center py-10 px-4 font-sans">
@@ -186,7 +204,7 @@ const SignUp = () => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+                      d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178a1.012 1.012 0 010 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
                     />
                     <path
                       strokeLinecap="round"
@@ -216,6 +234,7 @@ const SignUp = () => {
         <div className="flex flex-col gap-4">
           <button
             type="button"
+            onClick={hendelGoogleSignin}
             className="flex-1 flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5">
@@ -225,14 +244,15 @@ const SignUp = () => {
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
             </svg>
             Google দিয়ে সাইন ইন করুন
-          </button> 
+          </button>
 
           <button
+          onClick={hentdelGithub}
             type="button"
             className="flex-1 flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
           >
             <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398 1.028 2.688.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.678 2.688.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
             </svg>
             GitHub দিয়ে সাইন ইন করুন
           </button>
