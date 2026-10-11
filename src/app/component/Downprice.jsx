@@ -11,6 +11,8 @@ const Downprice = async () => {
 
     const data = await res.json();
 
+  
+
     const products = Array.isArray(data) ? data : data.data;
 
     // 'up' এর পরিবর্তে 'down' ফিল্টার করা হয়েছে

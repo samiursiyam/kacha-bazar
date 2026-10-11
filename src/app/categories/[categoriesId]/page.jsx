@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import React from "react";
 
 export const instant = false;
@@ -20,6 +21,10 @@ const CategoriesPage = async ({ params }) => {
 
   const data = await res.json();
   const category = data?.[0];
+
+  if(!category){
+    notFound()
+  }
 
   return (
     <div className="p-4 md:p-8 font-sans">

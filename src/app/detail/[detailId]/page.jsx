@@ -27,6 +27,8 @@ const page = async ({ params }) => {
 
     const markets = data.markets || [];
 
+
+
     const sortedMarkets = [...markets].sort((a, b) => {
         const aAvg = (a.min + a.max) / 2;
         const bAvg = (b.min + b.max) / 2;
@@ -67,7 +69,11 @@ const page = async ({ params }) => {
             : priceDiff < 0
             ? `গতকালের তুলনায় আজ দাম কমেছে ${toBn(Math.abs(priceDiff))} টাকা`
             : "গতকালের তুলনায় আজ দামে কোনো পরিবর্তন হয়নি";
+            
 
+  if(!markets){
+    notFound()
+  }
     return (
         <div className="max-w-7xl mx-auto p-4 md:p-6 min-h-screen">
             {/* Breadcrumb */}
