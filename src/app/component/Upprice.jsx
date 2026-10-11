@@ -5,69 +5,78 @@ const Upprice = async () => {
     const res = await fetch(
         "https://api.abcz.workers.dev/api/bazardor/products",
         {
-    next: { revalidate: 3600 },
-  }
+            next: { revalidate: 3600 },
+        }
     );
 
     const data = await res.json();
-
     const products = Array.isArray(data) ? data : data.data;
 
-    const upProducts = products
-        .filter((item) => item.change?.dir === "up")
+    // ১. প্রথমে ফিল্টার করা হচ্ছে (মোট কাউন্ট বের করার জন্য)
+    const allUpProducts = products.filter((item) => item.change?.dir === "up");
+    const totalUpCount = allUpProducts.length; // মোট সংখ্যা
+
+    // ২. এরপর সর্ট এবং স্লাইস করা হচ্ছে
+    const upProducts = allUpProducts
         .sort((a, b) => b.change.pct - a.change.pct)
         .slice(0, 6);
 
-        // console.log("data is",data.id);
-        
-
     return (
-        <div className=" py-6"> {/* হালকা সবুজ ব্যাকগ্রাউন্ড */}
-            <div className="container mx-auto px-4">
-                {/* হেডিং সেকশন */}
-                <h2 className="mb-5 text-xl font-bold flex items-center gap-1">
-                    <span className="text-red-500 text-sm">▲</span>
-                    <span className="text-gray-900">আজ দাম বেড়েছে</span>
-                </h2>
+        <div className="py-8 bg-gray-50/50"> 
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                
+                {/* হেডিং সেকশন (মোট সংখ্যা সহ) */}
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-bold flex items-center gap-2">
+                        <span className="flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 text-xs">▲</span>
+                        <span className="text-gray-900">আজ দাম বেড়েছে</span>
+                    </h2>
+                    
+                    {/* মোট কতটি পণ্যের দাম বেড়েছে তা এখানে দেখানো হচ্ছে */}
+                    <span className="text-xs sm:text-sm text-red-600 bg-red-50 border border-red-100 px-3 py-1 rounded-full font-semibold shadow-sm">
+                        মোট {totalUpCount} টি
+                    </span>
+                </div>
 
                 {/* কার্ড গ্রিড */}
- 
-
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {upProducts.map((item,ind) => (
-                        <Link href={`detail/${item.id}`}
+                    {upProducts.map((item, ind) => (
+                        <Link 
+                            href={`detail/${item.id}`}
                             key={ind}
-                            // এখানে শুধু কার্ডের চারপাশে হালকা বর্ডার (border border-gray-200) দেওয়া হয়েছে
-                            className="flex flex-col justify-between rounded-xl bg-white p-4 shadow-sm shadow-2xl border border-green-200"
+                            // মডার্ন কার্ড ডিজাইন এবং হোভার ইফেক্ট
+                            className="group flex flex-col justify-between rounded-2xl bg-white p-5 border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-red-500/5 hover:border-red-200 hover:-translate-y-1 transition-all duration-300"
                         >
                             {/* উপরের অংশ: ছবি এবং নাম */}
-                            <div className="flex items-center gap-4 mb-4 ">
-                                <div className="flex-shrink-0 rounded-2xl">
-                                    <span className="text-3xl flex items-center justify-center h-12 w-12 rounded-2xl bg-[#cee7e9]">
+                            <div className="flex items-center gap-4 mb-5">
+                                <div className="flex-shrink-0">
+                                    <span className="text-3xl flex items-center justify-center h-14 w-14 rounded-2xl bg-gray-50 group-hover:bg-red-50 transition-colors duration-300">
                                         {item.image}
                                     </span>
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-gray-800 leading-tight">
+                                    <h3 className="text-base font-bold text-gray-800 leading-tight group-hover:text-red-700 transition-colors">
                                         {item.nameBn}
                                     </h3>
-                                    <p className="text-xs text-gray-500 mt-0.5">
+                                    <p className="text-xs text-gray-500 mt-1 font-medium">
                                         প্রতি {item.unit}
                                     </p>
                                 </div>
                             </div>
 
                             {/* নিচের অংশ: দাম এবং পার্সেন্টেজ */}
-                            <div className="flex items-end justify-between mt-auto">
+                            <div className="flex items-end justify-between mt-auto pt-4 border-t border-gray-50">
                                 <div>
-                                    <p className="text-xs text-gray-500 mb-1">
+                                    <p className="text-[11px] text-gray-400 mb-1 font-medium">
                                         আজকের দাম
                                     </p>
-                                    <p className="text-xl font-bold text-gray-900">
-                                        {item.today} টাকা
+                                    <p className="text-xl font-extrabold text-gray-900">
+                                        {item.today} ৳
                                     </p>
                                 </div>
-                                <div className="flex items-center text-red-500 font-semibold text-sm gap-0.5">
+                                
+                                {/* পার্সেন্টেজ ব্যাজ */}
+                                <div className="flex items-center text-red-600 bg-red-50 px-2.5 py-1 rounded-lg text-sm font-bold gap-1 group-hover:bg-red-100 transition-colors">
                                     <span className="text-[10px]">▲</span>
                                     <span>{item.change.pct}%</span>
                                 </div>

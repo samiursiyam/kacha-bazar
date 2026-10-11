@@ -14,23 +14,30 @@ const Nevlinks = async () => {
   const data = await res.json()
 
   return (
-    <div className='bg-[#F3FBF4] py-3 sm:py-4'>
-      <div className='container mx-auto px-3 sm:px-6 lg:px-8'>
-        {/* Mobile: horizontal scroll | Desktop: normal flex */}
-        <div className='flex gap-3 sm:gap-5 overflow-x-auto scrollbar-hide pb-1 sm:pb-0 sm:flex-wrap sm:justify-start'>
+    // হালকা বর্ডার, কোনো হেভি ব্যাকগ্রাউন্ড নেই
+    <div className='bg-white border-b border-gray-100 shadow-sm'>
+      {/* আপনার রিকোয়ারমেন্ট অনুযায়ী container mx-auto */}
+      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
+        
+        {/* Mobile: horizontal scroll | Desktop: justify-between & flex-wrap */}
+        <div className='flex gap-1.5 sm:gap-2 overflow-x-auto scrollbar-hide py-2 sm:py-3 sm:flex-wrap sm:justify-between items-center'>
           {
             data.map(n => (
               <Link
                 href={`/categories/${n.slug}`}
-                className='flex items-center gap-1 sm:gap-1.5 whitespace-nowrap text-sm sm:text-base text-gray-700 hover:text-[#05893E] transition-colors flex-shrink-0 px-3 py-1.5 sm:px-0 sm:py-0 rounded-full sm:rounded-none bg-white sm:bg-transparent border border-gray-200 sm:border-0 shadow-sm sm:shadow-none'
                 key={n.id}
+                // মডার্ন ক্লিন ডিজাইন, হোভার করলে হালকা সবুজ ব্যাকগ্রাউন্ড আসবে
+                className='group flex items-center gap-2 whitespace-nowrap text-sm sm:text-base font-medium text-gray-600 hover:text-emerald-700 transition-all duration-300 flex-shrink-0 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl hover:bg-emerald-50 active:scale-95'
               >
-                <span>{n.icon}</span>
+                <span className="text-lg transition-transform duration-300 group-hover:scale-110">
+                  {n.icon}
+                </span>
                 <span>{n.nameBn}</span>
               </Link>
             ))
           }
         </div>
+        
       </div>
     </div>
   );
