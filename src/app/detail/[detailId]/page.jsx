@@ -75,7 +75,7 @@ const page = async ({ params }) => {
                     <span className="text-gray-800 font-semibold">{data.nameBn}</span>
                 </div>
 
-                {/* Header Section - প্রিমিয়াম কার্ড লুক */}
+                {/* Header Section - প্রিমিয়াম কার্ড লুক */}
                 <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-emerald-50/50 p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
                     <div className="flex items-center gap-5">
                         <div className="w-20 h-20 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl flex items-center justify-center text-4xl shadow-inner border border-emerald-100/50">
@@ -184,7 +184,7 @@ const page = async ({ params }) => {
                     </div>
                 </div>
 
-                {/* Market Table Section - ক্লিন ও মডার্ন টেবিল */}
+                {/* Market Table Section - ক্লিন ও মডার্ন টেবিল (মোবাইল ফ্রেন্ডলি) */}
                 <div>
                     <h2 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
                         <span className="w-1.5 h-5 bg-emerald-500 rounded-full inline-block"></span>
@@ -193,18 +193,18 @@ const page = async ({ params }) => {
 
                     <div className="bg-white rounded-2xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse min-w-[600px]">
+                            <table className="w-full text-left border-collapse">
                                 <thead>
-                                    <tr className="bg-gray-50/80 border-b border-gray-100 text-xs sm:text-sm text-gray-600">
-                                        <th className="py-4 px-5 font-bold uppercase tracking-wider">বাজার</th>
-                                        <th className="py-4 px-5 font-bold uppercase tracking-wider">বিভাগ</th>
-                                        <th className="py-4 px-5 font-bold uppercase tracking-wider text-right">সর্বনিম্ন</th>
-                                        <th className="py-4 px-5 font-bold uppercase tracking-wider text-right">সর্বোচ্চ</th>
-                                        <th className="py-4 px-5 font-bold uppercase tracking-wider text-right">গড়</th>
+                                    <tr className="bg-gray-50/80 border-b border-gray-100 text-[11px] sm:text-sm text-gray-600">
+                                        <th className="py-3 px-1.5 sm:py-4 sm:px-5 font-bold uppercase tracking-wider w-[28%]">বাজার</th>
+                                        <th className="py-3 px-1.5 sm:py-4 sm:px-5 font-bold uppercase tracking-wider w-[18%]">বিভাগ</th>
+                                        <th className="py-3 px-1.5 sm:py-4 sm:px-5 font-bold uppercase tracking-wider text-right w-[18%]">সর্বনিম্ন</th>
+                                        <th className="py-3 px-1.5 sm:py-4 sm:px-5 font-bold uppercase tracking-wider text-right w-[18%]">সর্বোচ্চ</th>
+                                        <th className="py-3 px-1.5 sm:py-4 sm:px-5 font-bold uppercase tracking-wider text-right w-[18%]">গড়</th>
                                     </tr>
                                 </thead>
 
-                                <tbody className="text-sm divide-y divide-gray-50">
+                                <tbody className="text-[11px] sm:text-sm divide-y divide-gray-50">
                                     {sortedMarkets.map((market, index) => {
                                         const average = Math.round((market.min + market.max) / 2);
                                         return (
@@ -212,20 +212,20 @@ const page = async ({ params }) => {
                                                 key={`${market.market}-${market.division}-${index}`}
                                                 className="hover:bg-emerald-50/30 transition-colors group"
                                             >
-                                                <td className="py-4 px-5 text-gray-800 font-bold group-hover:text-emerald-700 transition-colors">
+                                                <td className="py-3 px-1.5 sm:py-4 sm:px-5 text-gray-800 font-bold group-hover:text-emerald-700 transition-colors break-words">
                                                     {market.market}
                                                 </td>
-                                                <td className="py-4 px-5 text-gray-500 font-medium">
+                                                <td className="py-3 px-1.5 sm:py-4 sm:px-5 text-gray-500 font-medium break-words">
                                                     {market.division}
                                                 </td>
-                                                <td className="py-4 px-5 text-gray-800 text-right font-semibold">
+                                                <td className="py-3 px-1.5 sm:py-4 sm:px-5 text-gray-800 text-right font-semibold whitespace-nowrap">
                                                     {toBn(market.min)} ৳
                                                 </td>
-                                                <td className="py-4 px-5 text-gray-800 text-right font-semibold">
+                                                <td className="py-3 px-1.5 sm:py-4 sm:px-5 text-gray-800 text-right font-semibold whitespace-nowrap">
                                                     {toBn(market.max)} ৳
                                                 </td>
-                                                <td className="py-4 px-5 text-right">
-                                                    <span className="bg-gray-100 text-gray-800 font-bold px-3 py-1 rounded-lg text-xs sm:text-sm group-hover:bg-emerald-100 group-hover:text-emerald-800 transition-colors">
+                                                <td className="py-3 px-1.5 sm:py-4 sm:px-5 text-right whitespace-nowrap">
+                                                    <span className="bg-gray-100 text-gray-800 font-bold px-1.5 py-0.5 sm:px-3 sm:py-1 rounded sm:rounded-lg text-[11px] sm:text-sm group-hover:bg-emerald-100 group-hover:text-emerald-800 transition-colors inline-block">
                                                         {toBn(average)} ৳
                                                     </span>
                                                 </td>

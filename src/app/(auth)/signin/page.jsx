@@ -53,11 +53,23 @@ const SignIn = () => {
     };
 
 
-    const hentdelGithub = async()=>{
- const data = await authClient.signIn.social({
-        provider: "github"
-    })
+  
+const hentdelGithub = async () => {
+  try {
+    const { error } = await authClient.signIn.social({
+      provider: "github",
+      callbackURL: "/",
+      errorCallbackURL: "/signin",
+    });
+
+    if (error) {
+      toast.error(error.message || "GitHub দিয়ে সাইন ইন করা যায়নি।");
     }
+  } catch (error) {
+    toast.error("GitHub Login ব্যর্থ হয়েছে। আবার চেষ্টা করুন।");
+  }
+};
+
 
     return (
         <div className="bg-gray-100 flex flex-col justify-center items-center py-10 px-4 font-sans">

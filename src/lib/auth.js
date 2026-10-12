@@ -1,4 +1,3 @@
-
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
@@ -26,16 +25,17 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRATE,
     },
-       github: { 
-            clientId: process.env.GITHUB_CLIENT_ID,
-            clientSecret: process.env.GITHUB_SECRAT
-        }, 
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET, // ✅ typo ঠিক করা হয়েছে
+      scope: ["user:email"], // ✅ GitHub থেকে email পাওয়ার জন্য
+    },
   },
 
   account: {
     accountLinking: {
       enabled: true,
-      trustedProviders: ["google"],
+      trustedProviders: ["google", "github"],
     },
   },
 });
